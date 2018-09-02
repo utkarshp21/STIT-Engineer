@@ -8,6 +8,12 @@ import LocationMarker from './LocationMarker';
 
 
 class EventDetailsModal extends React.Component {
+  renderDistance(event) {
+    return (
+      <td>{event.user_distance.status != "ZERO_RESULTS"?event.user_distance.distance.text:"No Direct Road Route"}</td>
+    )
+  }
+
   renderData() {
     const event = this.props.events[this.props.show_event_modal.event_index];
     const location = {
@@ -20,15 +26,28 @@ class EventDetailsModal extends React.Component {
       };
     
     return ( 
-        <Modal show={this.props.show_event_modal} onHide={()=>this.props.eventsActions.showEventModal({state:false,event_index:null})}>
+        <Modal className="container"  show={this.props.show_event_modal} onHide={()=>this.props.eventsActions.showEventModal({state:false,event_index:null})}>
           <Modal.Header closeButton >
             <h2>{event.name}</h2>
           </Modal.Header>
-          <Modal.Body>
-            <h3>Start Time:</h3> <p>{event.time_start}</p>
-            <h3> Distance: </h3> <p>{event.user_distance?event.user_distance.distance.text:"-"}</p >
-            <h3>Cost:</h3> <p>{event.cost?event.cost:"Not Available"}</p>
-            <h3>Description:</h3> <p>{event.description}</p>
+          < Modal.Body>
+              <div class="row">
+                <div className="col-md-6">
+                 <h4>Start Time:</h4> <p>{event.time_start}</p>
+                </div>
+                <div className="col-md-6">
+                 <h4>Address:</h4> <p>{event.location.display_address}</p>
+                </div>
+                <div className="col-md-6">
+                  <h4>Description:</h4><p>{event.user_distance?this.renderDistance(event):"-"}</p>
+                </div>
+                <div className="col-md-6">
+                   <h4>Cost($):</h4><p>{event.is_free?"Free":(event.cost?event.cost:"Not Available")}</p>
+                </div>
+                <div className="col-md-12">
+                   <h4>Description:</h4> <p>{event.description}</p>
+                </div>
+            </div>
             <LocationMarker location={location}> </LocationMarker>
           </Modal.Body>
           <Modal.Footer>

@@ -9,39 +9,45 @@ import EventDetailsModal from './EventDetails';
 class eventsList extends React.Component { 
     
   componentWillMount() { 
-       this.props.eventsActions.fetchEvents();
+       this.props.eventsActions.fetchUserLocation();
   }
-  
+  renderDistance(event) {
+    return (
+      <td>{event.user_distance.status != "ZERO_RESULTS"?event.user_distance.distance.text:"No Direct Road Route"}</td>
+    )
+  }
   renderData() {
     return ( 
         <div>
           Total Events :{this.props.event_count}
-          <table className="table  table-hover">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Time</th>
-                  <th scope = "col">Location</th>
-                  <th scope="col">Distance(miles)</th>
-                  <th scope = "col" >Cost</th>
-                </tr>
-              </thead>
-              <tbody>
-                {
-                  this.props.events.map((event,index) => ( 
-                    <tr onClick={()=>this.props.eventsActions.showEventModal({state:true,event_index:index})} key="{index}">
-                      <td>{index+1}</td>
-                      <td>{event.name}</td>
-                      <td>{event.time_start}</td>
-                      <td>{event.location.display_address[0]}</td>
-                      <td>{event.user_distance?event.user_distance.distance.text:"-"}</td>
-                      <td>{event.cost?event.cost:"Not Available"}</td>
-                    </tr>
-                  ))
-                }
-              </tbody>
-          </table>
+          <div className="table-responsive ">
+            <table className="table  table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Distance(miles)</th>
+                    <th scope="col">Cost($)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {
+                    this.props.events.map((event,index) => (
+                      <tr onClick={()=>this.props.eventsActions.showEventModal({state:true,event_index:index})} key="{index}">
+                        <td>{index+1}</td>
+                        <td>{event.name}</td>
+                        <td>{event.time_start}</td>
+                        <td>{event.location.display_address[0]}</td>
+                        <td>{event.user_distance?this.renderDistance(event):"-"}</td>
+                        <td>{event.is_free?"Free":(event.cost?event.cost:"Not Available")}</td>
+                      </tr>
+                    ))
+                  }
+                </tbody>
+            </table>
+          </div>
           <EventDetailsModal/>          
         </div>
       );
