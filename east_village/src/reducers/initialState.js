@@ -5,5 +5,8 @@ export default {
         latitute: null,
         longitude: null
     },
-    show_event_modal: false
+    show_event_modal: {
+        state:false,
+        event_index:null
+    }
 };

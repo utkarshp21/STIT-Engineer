@@ -45,11 +45,12 @@ const reducer = (state = initialState, action) => {
       return newState;
     
     case SHOW_EVENT_MODAL:
-
       newState = Object.assign({}, state, {
-        show_event_modal: action.modal_show_status,
+        show_event_modal: Object.assign({}, state.show_event_modal, {
+          state: action.modal_show_status.state,
+          event_index: action.modal_show_status.event_index
+        }),
       })
-
       return newState
 
     default:

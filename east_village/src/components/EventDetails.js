@@ -8,42 +8,58 @@ import {Modal,Button} from 'react-bootstrap';
 
 // import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 
-class eventsDetails extends React.Component { 
+class EventDetailsModal extends React.Component {
     
   componentWillMount() { 
     //    this.props.eventsActions.fetchEvents();
   }
-   
-  render() {
-    return (
-       <div>
-          
-          <Modal show={this.props.show_event_modal} onHide={()=>this.props.eventsActions.showEventModal(false)}>
-          < Modal.Header closeButton >
-            <Modal.Title>Modal heading</Modal.Title>
+  renderData() {
+   debugger;
+    return ( 
+        <Modal show={this.props.show_event_modal} onHide={()=>this.props.eventsActions.showEventModal({state:false,event_index:null})}>
+          <Modal.Header closeButton >
+            <Modal.Title><h2>{this.props.events[this.props.show_event_modal.event_index].name}</h2></Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <h4>Text in a modal</h4>
+            <h3>Start Time:</h3> <p>{this.props.events[this.props.show_event_modal.event_index].time_start}</p>
+            <h3>Distance :</h3> <p>{this.props.events[this.props.show_event_modal.event_index].user_distance?this.props.events[this.props.show_event_modal.event_index].user_distance.distance.text:"-"}</p>
+            <h3>Cost:</h3> <p>{this.props.events[this.props.show_event_modal.event_index].cost?this.props.events[this.props.show_event_modal.event_index].cost:"Not Available"}</p>
+            <h3>Description: </h3> <p>{this.props.events[this.props.show_event_modal.event_index].description}</p>
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={()=>this.props.eventsActions.showEventModal(false)}>Close</Button>
+            <Button onClick={()=>this.props.eventsActions.showEventModal({state:false,event_index:null})}>Close</Button>
           </Modal.Footer>
         </Modal>
+      );
+  }
 
-          
-          </div>
+  render() {
+    debugger;
+    return (
+        <div className="">
+          {
+            this.props.show_event_modal.event_index != null ?
+            this.renderData()
+            :
+            <div className="">
+        
+            </div>
+          }
+        </div>
     );
   }
 }
 
-eventsDetails.propTypes = {
+EventDetailsModal.propTypes = {
   eventsActions: PropTypes.object,
-  show_event_modal: PropTypes.bool
+  show_event_modal: PropTypes.object,
+  events: PropTypes.array,
 };
 
 function mapStateToProps(state) {
   return {
-    show_event_modal: state.show_event_modal
+    show_event_modal: state.show_event_modal,
+    events:state.events
   };
 }
 
@@ -56,4 +72,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(eventsDetails);
+)(EventDetailsModal);
