@@ -54,7 +54,7 @@ export function fetchUserLocation() {
                  dispatch(fetchEvents(user_location))
              });
         } else {
-            console.log("User Location Not Available")
+            console.log("Geolocation in Navigator not available")
         }
        
     }

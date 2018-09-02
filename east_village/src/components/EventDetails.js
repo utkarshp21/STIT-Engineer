@@ -10,7 +10,7 @@ import LocationMarker from './LocationMarker';
 class EventDetailsModal extends React.Component {
   renderDistance(event) {
     return (
-      <td>{event.user_distance.status != "ZERO_RESULTS"?event.user_distance.distance.text:"No Direct Road Route"}</td>
+      <td>{event.user_distance.status !== "ZERO_RESULTS"?event.user_distance.distance.text:"No Direct Road Route"}</td>
     )
   }
 
@@ -31,7 +31,7 @@ class EventDetailsModal extends React.Component {
             <h2>{event.name}</h2>
           </Modal.Header>
           < Modal.Body>
-              <div class="row">
+              <div className="row">
                 <div className="col-md-6">
                  <h4>Start Time:</h4> <p>{event.time_start}</p>
                 </div>

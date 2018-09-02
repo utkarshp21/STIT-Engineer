@@ -40,7 +40,7 @@ const reducer = (state = initialState, action) => {
       }).slice();
       
       newEvents.sort(function (a, b) {
-        if (a.user_distance.status != "ZERO_RESULTS" && b.user_distance.status) {
+        if (a.user_distance.status !== "ZERO_RESULTS" && b.user_distance.status) {
            return a.user_distance.distance.value - b.user_distance.distance.value;
         }
         return a.user_distance.status
