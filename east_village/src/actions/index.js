@@ -9,7 +9,7 @@ export const FETCH_ALL_EVENTS = 'FETCH_ALL_EVENTS';
 export const RECIEVE_ALL_EVENTS = 'RECIEVE_ALL_EVENTS';
 export const RECIEVE_USER_LOCATION = 'RECIEVE_USER_LOCATION';
 export const RECIEVE_USER_DISTANCE = 'RECIEVE_USER_DISTANCE';
-
+export const SHOW_EVENT_MODAL = 'SHOW_EVENT_MODAL'
 
 export function receiveEvents(events) {
     return {
@@ -32,6 +32,13 @@ export function receiveDistance(distance) {
     };
 }
 
+
+export function showEventModal(modal_show_status) {
+    return {
+        type: SHOW_EVENT_MODAL,
+        modal_show_status
+    };
+}
 
 function fetchUserLocation() {
     return (dispatch, getState) => {

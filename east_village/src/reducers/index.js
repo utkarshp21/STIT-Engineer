@@ -3,7 +3,8 @@ import {
     FETCH_ALL_EVENTS,
     RECIEVE_ALL_EVENTS,
     RECIEVE_USER_LOCATION,
-    RECIEVE_USER_DISTANCE
+    RECIEVE_USER_DISTANCE,
+    SHOW_EVENT_MODAL
 } from '../actions/';
 
 
@@ -32,7 +33,6 @@ const reducer = (state = initialState, action) => {
       return newState;
 
     case RECIEVE_USER_DISTANCE:
-    
       const newEvents = state.events.map((e, index) => {
          return Object.assign({}, e, {
            user_distance: action.distance.rows[0].elements[index],
@@ -42,8 +42,15 @@ const reducer = (state = initialState, action) => {
       newState = Object.assign({}, state, {
         events: newEvents,
       })
-
       return newState;
+    
+    case SHOW_EVENT_MODAL:
+
+      newState = Object.assign({}, state, {
+        show_event_modal: action.modal_show_status,
+      })
+
+      return newState
 
     default:
       return state;
