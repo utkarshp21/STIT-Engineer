@@ -3,6 +3,7 @@ import {bindActionCreators} from 'redux';
 import * as eventsActions from '../actions/';
 import PropTypes from 'prop-types';
 import React from 'react';
+import '../App.css';
 
 import EventDetailsModal from './EventDetails';
 
@@ -13,7 +14,7 @@ class eventsList extends React.Component {
   }
   renderDistance(event) {
     return (
-      <td>{event.user_distance.status != "ZERO_RESULTS"?event.user_distance.distance.text:"No Direct Road Route"}</td>
+      <td>{event.user_distance.status !== "ZERO_RESULTS"?event.user_distance.distance.text:"No Direct Road Route"}</td>
     )
   }
   renderData() {
@@ -40,7 +41,7 @@ class eventsList extends React.Component {
                         <td>{event.name}</td>
                         <td>{event.time_start}</td>
                         <td>{event.location.display_address[0]}</td>
-                        <td>{event.user_distance?this.renderDistance(event):"-"}</td>
+                        {event.user_distance?this.renderDistance(event):<td>-</td>}
                         <td>{event.is_free?"Free":(event.cost?event.cost:"Not Available")}</td>
                       </tr>
                     ))
@@ -57,7 +58,7 @@ class eventsList extends React.Component {
     return (
       <div className="">
           {
-            this.props.events.length>0?this.renderData():<div className="">No Data</div>
+            this.props.events.length>0?this.renderData():<div className="loader"></div>
           }
       </div>
     );
