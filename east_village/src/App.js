@@ -7,11 +7,14 @@ import EventsList from './components/EventsList';
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
+      <div className="container">
+        <div >
+          <h1>East Village Events</h1>   
+        </div>
+        <div className="jumbotron" style={{padding:"10px 5px"}}>
+          <h3>Welcome Offical Website of East Village!</h3>      
+          <p>Get up to date information about top 20 events near you. Click on the events to see exact location on map and other additional information</p>
+        </div>
         <EventsList/>
       </div>
     );
@@ -19,3 +22,4 @@ class App extends Component {
 }
 
 export default App;
+
