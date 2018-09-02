@@ -4,27 +4,32 @@ import * as eventsActions from '../actions/';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {Modal,Button} from 'react-bootstrap';
+import LocationMarker from './LocationMarker'; 
 
-
-// import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 
 class EventDetailsModal extends React.Component {
-    
-  componentWillMount() { 
-    //    this.props.eventsActions.fetchEvents();
-  }
   renderData() {
-   debugger;
+    const event = this.props.events[this.props.show_event_modal.event_index];
+    const location = {
+         event: {
+           latitude: event.latitude,
+           longitude: event.longitude,
+           
+          },
+          user: this.props.user_location
+      };
+    
     return ( 
         <Modal show={this.props.show_event_modal} onHide={()=>this.props.eventsActions.showEventModal({state:false,event_index:null})}>
           <Modal.Header closeButton >
-            <Modal.Title><h2>{this.props.events[this.props.show_event_modal.event_index].name}</h2></Modal.Title>
+            <h2>{event.name}</h2>
           </Modal.Header>
           <Modal.Body>
-            <h3>Start Time:</h3> <p>{this.props.events[this.props.show_event_modal.event_index].time_start}</p>
-            <h3>Distance :</h3> <p>{this.props.events[this.props.show_event_modal.event_index].user_distance?this.props.events[this.props.show_event_modal.event_index].user_distance.distance.text:"-"}</p>
-            <h3>Cost:</h3> <p>{this.props.events[this.props.show_event_modal.event_index].cost?this.props.events[this.props.show_event_modal.event_index].cost:"Not Available"}</p>
-            <h3>Description: </h3> <p>{this.props.events[this.props.show_event_modal.event_index].description}</p>
+            <h3>Start Time:</h3> <p>{event.time_start}</p>
+            <h3> Distance: </h3> <p>{event.user_distance?event.user_distance.distance.text:"-"}</p >
+            <h3>Cost:</h3> <p>{event.cost?event.cost:"Not Available"}</p>
+            <h3>Description:</h3> <p>{event.description}</p>
+            <LocationMarker location={location}> </LocationMarker>
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={()=>this.props.eventsActions.showEventModal({state:false,event_index:null})}>Close</Button>
@@ -34,7 +39,6 @@ class EventDetailsModal extends React.Component {
   }
 
   render() {
-    debugger;
     return (
         <div className="">
           {
@@ -52,14 +56,19 @@ class EventDetailsModal extends React.Component {
 
 EventDetailsModal.propTypes = {
   eventsActions: PropTypes.object,
-  show_event_modal: PropTypes.object,
+  show_event_modal: PropTypes.shape({
+    state:PropTypes.bool,
+    event_index: PropTypes.number
+  }),
   events: PropTypes.array,
+  user_location:PropTypes.object
 };
 
 function mapStateToProps(state) {
   return {
     show_event_modal: state.show_event_modal,
-    events:state.events
+    events:state.events,
+    user_location: state.user_location
   };
 }
 

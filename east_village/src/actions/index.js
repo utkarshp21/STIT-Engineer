@@ -11,6 +11,8 @@ export const RECIEVE_USER_LOCATION = 'RECIEVE_USER_LOCATION';
 export const RECIEVE_USER_DISTANCE = 'RECIEVE_USER_DISTANCE';
 export const SHOW_EVENT_MODAL = 'SHOW_EVENT_MODAL'
 
+const cors_proxy = 'https://thingproxy.freeboard.io/fetch/';
+
 export function receiveEvents(events) {
     return {
         type: RECIEVE_ALL_EVENTS,
@@ -70,7 +72,7 @@ function googleDistanceUrl(events, user_location) {
 
     let origins = 'origins='+ user_location.latitude +',' +user_location.longitude
 
-    return "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&" + origins + '&' + api_key + '&' + destinations;
+    return cors_proxy + "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&" + origins + '&' + api_key + '&' + destinations;
     
 }
 
@@ -91,7 +93,7 @@ function fetchDistance(events, user_location) {
 function yelpurl() {
     //Yelp API doesn't allow CORS hence using proxy to get data. 
     //https://github.com/Freeboard/thingproxy - API call throttled to 10 requests/second for each IP
-    return 'https://thingproxy.freeboard.io/fetch/' + 'https://api.yelp.com/v3/events';
+    return cors_proxy + 'https://api.yelp.com/v3/events';
 }
 
 

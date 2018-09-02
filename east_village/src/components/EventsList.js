@@ -12,11 +12,7 @@ class eventsList extends React.Component {
        this.props.eventsActions.fetchEvents();
   }
   
-  // handleModalClose() {
-  //    this.props.eventsActions.showEventModal(false);
-  // }
   renderData() {
-   
     return ( 
         <div>
           Total Events :{this.props.event_count}
@@ -46,7 +42,7 @@ class eventsList extends React.Component {
                 }
               </tbody>
           </table>
-          < EventDetailsModal/>          
+          <EventDetailsModal/>          
         </div>
       );
   }
@@ -66,14 +62,12 @@ eventsList.propTypes = {
   eventsActions: PropTypes.object,
   events: PropTypes.array,
   event_count : PropTypes.number,
-  show_event_modal: PropTypes.object
 };
 
 function mapStateToProps(state) {
   return {
     events: state.events,
     event_count: state.events_count,
-    show_event_modal: state.show_event_modal
   };
 }
 
