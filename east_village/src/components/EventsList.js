@@ -40,7 +40,7 @@ class eventsList extends React.Component {
                       <tr onClick={()=>this.props.eventsActions.showEventModal({state:true,event_index:index})} key={index}>
                         <td >{index+1}</td>
                         <td>{event.name}</td>
-                        <td>{Moment(event.time_start).format('d MMM YYYY')}</td>
+                        <td>{Moment(event.time_start).format('MMMM Do YYYY, h:mm a')}</td>
                         <td>{event.location.display_address[0]}</td>
                         {event.user_distance?this.renderDistance(event):<td>Your location is not available</td>}
                         <td>{event.is_free?"Free":(event.cost?event.cost:"Not Available")}</td>

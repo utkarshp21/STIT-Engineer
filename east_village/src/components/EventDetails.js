@@ -34,7 +34,7 @@ class EventDetailsModal extends React.Component {
           < Modal.Body>
               <div className="row">
                 <div className="col-md-6">
-                 <h4>Start Time:</h4> <p>{Moment(event.time_start).format('d MMM YYYY')}</p>
+                 <h4>Start Time:</h4> <p>{Moment(event.time_start).format('MMMM Do YYYY, h:mm a')}</p>
                 </div>
                 <div className="col-md-6">
                  <h4>Address:</h4> <p>{event.location.display_address}</p>
