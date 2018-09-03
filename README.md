@@ -1,4 +1,4 @@
-STIT PROGRAMMING CHALLENGE 
+# STIT PROGRAMMING CHALLENGE 
 
 Heroku Working Application Link - https://eastvillage1.herokuapp.com/
 
@@ -18,16 +18,9 @@ Steps to setup application:
 5) Open localhost:3000 in your browser
 
 6) Don't forget to allow the application to use your location
+      
+# Screenshot
 
-        
-# Scrennshots
+1)![ScreenShot](https://raw.githubusercontent.com/utkarshp21/STIT-Engineer/master/Screenshots/1.png)
 
-1)
-
-![ScreenShot](https://github.com/utkarshp21/STIT-Engineer/blob/master/screenshots/1.png)
-
-2)
-
-![ScreenShot](https://github.com/utkarshp21/STIT-Engineer/blob/master/screenshots/2.png)
-
-
+2)![ScreenShot](https://raw.githubusercontent.com/utkarshp21/STIT-Engineer/master/Screenshots/2.png)
