@@ -1,9 +1,4 @@
-//As this is a small applicaiton declared actions here, otherwise 
-//would have created other file 
-import {
-    google_api_key,
-    yelp_api_key,
-} from '../credentials';
+import { google_api_key,yelp_api_key,} from '../credentials';
 
 export const FETCH_ALL_EVENTS = 'FETCH_ALL_EVENTS';
 export const RECIEVE_ALL_EVENTS = 'RECIEVE_ALL_EVENTS';
@@ -11,9 +6,12 @@ export const RECIEVE_USER_LOCATION = 'RECIEVE_USER_LOCATION';
 export const RECIEVE_USER_DISTANCE = 'RECIEVE_USER_DISTANCE';
 export const SHOW_EVENT_MODAL = 'SHOW_EVENT_MODAL'
 
+
 const cors_proxy = 'https://thingproxy.freeboard.io/fetch/';
 
 export function receiveEvents(events) {
+    //Action dispatched after list of event is successfully fetched 
+    //from the YELP API
     return {
         type: RECIEVE_ALL_EVENTS,
         events
@@ -21,6 +19,7 @@ export function receiveEvents(events) {
 }
 
 export function receiveLocation(location) {
+    //Action dispatched after user location is succefully fetched
     return {
         type: RECIEVE_USER_LOCATION,
         location
@@ -28,6 +27,8 @@ export function receiveLocation(location) {
 }
 
 export function receiveDistance(distance) {
+    //Action dispatched after distance between user and events is fetched 
+    //from Google Map API 
     return {
         type: RECIEVE_USER_DISTANCE,
         distance
@@ -36,6 +37,7 @@ export function receiveDistance(distance) {
 
 
 export function showEventModal(modal_show_status) {
+    //Action dispatched to show or hide event's detail view modal
     return {
         type: SHOW_EVENT_MODAL,
         modal_show_status
@@ -44,6 +46,8 @@ export function showEventModal(modal_show_status) {
 
 
 export function fetchUserLocation() {
+    //Function to fetch user location of user using Geolocation and handle condtion 
+    //based on success and failure
     return (dispatch) => {
         if ("geolocation" in navigator) {
              navigator.geolocation.getCurrentPosition(function (position) {
@@ -83,6 +87,9 @@ export function fetchUserLocation() {
 
 
 function googleDistanceUrl(events, user_location) {
+    //Function to formulate request URL for fetching  distance between user location and various events by
+    //using google's distance matrix API
+
     const api_key = "key=" + google_api_key;
      
     let destinations = '&destinations=';
@@ -100,7 +107,8 @@ function googleDistanceUrl(events, user_location) {
 
 
 function fetchDistance(events, user_location) {
-   
+    //Function to fetch distance between user location and various events by
+    //using google's distance matrix API
     return (dispatch, getState) => {
         return fetch(googleDistanceUrl(events, user_location), {
                 method: 'GET',
@@ -113,8 +121,7 @@ function fetchDistance(events, user_location) {
 
 
 function yelpurl(location) {
-    //Yelp API doesn't allow CORS hence using proxy to get data. 
-    //https://github.com/Freeboard/thingproxy - API call throttled to 10 requests/second for each IP
+    //Function to formulate request URL for fetching events from YELP 
     if (location.latitude){
         return cors_proxy + 'https://api.yelp.com/v3/events?limit=20&latitude=' + location.latitude + '&longitude=' + location.longitude;
     }
@@ -124,6 +131,7 @@ function yelpurl(location) {
 
 
 function fetchEvents() {
+    //Function to fetch events from YELP
     return (dispatch, getState) => {
         return fetch(yelpurl(getState().user_location), {
                 method: 'GET',
