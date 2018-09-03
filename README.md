@@ -15,7 +15,7 @@ Steps to setup application:
 
 4) Start the application by using command - npm start
 
-5) Open localhost:3000 in your browser
+5) In your browser open localhost:3000 or with other port if its occupied
 
 6) Don't forget to allow the application to use your location
       
@@ -24,3 +24,5 @@ Steps to setup application:
 1)![ScreenShot](https://raw.githubusercontent.com/utkarshp21/STIT-Engineer/master/Screenshots/1.png)
 
 2)![ScreenShot](https://raw.githubusercontent.com/utkarshp21/STIT-Engineer/master/Screenshots/2.png)
+
+3)![ScreenShot](https://raw.githubusercontent.com/utkarshp21/STIT-Engineer/master/Screenshots/3.png)
