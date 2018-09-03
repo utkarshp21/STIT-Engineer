@@ -42,19 +42,40 @@ export function showEventModal(modal_show_status) {
     };
 }
 
+
 export function fetchUserLocation() {
     return (dispatch) => {
         if ("geolocation" in navigator) {
              navigator.geolocation.getCurrentPosition(function (position) {
-                 const user_location = {
-                     latitude: position.coords.latitude,
-                     longitude: position.coords.longitude
-                 }
-                 dispatch(receiveLocation(user_location))
-                 dispatch(fetchEvents(user_location))
-             });
+                         const user_location = {
+                             latitude: position.coords.latitude,
+                             longitude: position.coords.longitude
+                         }
+                         dispatch(receiveLocation(user_location))
+                         dispatch(fetchEvents())
+                     }
+                ,
+                function showError(error) {
+                    dispatch(fetchEvents())
+                    switch (error.code) {
+                        case error.PERMISSION_DENIED:
+                            alert("User denied the request for Geolocation.")
+                            break;
+                        case error.POSITION_UNAVAILABLE:
+                            alert("Your Location information is unavailable.")
+                            break;
+                        case error.TIMEOUT:
+                            alert("The request to get your location timed out.")
+                            break;
+                        case error.UNKNOWN_ERROR:
+                            alert("An unknown error occurred while fetching your location.")
+                            break;
+                    }
+                }
+            );
         } else {
-            console.log("Geolocation in Navigator not available")
+            dispatch(fetchEvents())
+            alert("Geolocation is not supported by this browser.");
         }
        
     }
@@ -94,7 +115,11 @@ function fetchDistance(events, user_location) {
 function yelpurl(location) {
     //Yelp API doesn't allow CORS hence using proxy to get data. 
     //https://github.com/Freeboard/thingproxy - API call throttled to 10 requests/second for each IP
-    return cors_proxy + 'https://api.yelp.com/v3/events?limit=20&latitude='+location.latitude+'&longitude='+location.longitude;
+    if (location.latitude){
+        return cors_proxy + 'https://api.yelp.com/v3/events?limit=20&latitude=' + location.latitude + '&longitude=' + location.longitude;
+    }
+    return cors_proxy + 'https://api.yelp.com/v3/events?limit=20';
+
 }
 
 
@@ -110,7 +135,9 @@ function fetchEvents() {
             .then(response => response.json())
             .then(json => {
                 dispatch(receiveEvents(json))
-                dispatch(fetchDistance(getState().events, getState().user_location))
+                if (getState().user_location.latitude){
+                    dispatch(fetchDistance(getState().events, getState().user_location))
+                }       
             });
     };
 }

@@ -40,7 +40,7 @@ class EventDetailsModal extends React.Component {
                  <h4>Address:</h4> <p>{event.location.display_address}</p>
                 </div>
                 <div className="col-md-6">
-                  <h4>Description:</h4><p>{event.user_distance?this.renderDistance(event):"-"}</p>
+                  <h4>Distance:</h4><p>{event.user_distance?this.renderDistance(event):"Your location is not available"}</p>
                 </div>
                 <div className="col-md-6">
                    <h4>Cost($):</h4><p>{event.is_free?"Free":(event.cost?event.cost:"Not Available")}</p>

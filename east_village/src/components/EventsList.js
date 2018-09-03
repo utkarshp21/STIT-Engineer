@@ -42,7 +42,7 @@ class eventsList extends React.Component {
                         <td>{event.name}</td>
                         <td>{Moment(event.time_start).format('d MMM YYYY')}</td>
                         <td>{event.location.display_address[0]}</td>
-                        {event.user_distance?this.renderDistance(event):<td>-</td>}
+                        {event.user_distance?this.renderDistance(event):<td>Your location is not available</td>}
                         <td>{event.is_free?"Free":(event.cost?event.cost:"Not Available")}</td>
                       </tr>
                     ))

@@ -38,12 +38,11 @@ const reducer = (state = initialState, action) => {
            user_distance: action.distance.rows[0].elements[index],
          })
       }).slice();
-      
+
       newEvents.sort(function (a, b) {
-        if (a.user_distance.status !== "ZERO_RESULTS" && b.user_distance.status) {
+        if (a.user_distance.status !== "ZERO_RESULTS" && b.user_distance.status !== "ZERO_RESULTS") {
            return a.user_distance.distance.value - b.user_distance.distance.value;
         }
-        return a.user_distance.status
       });
 
       newState = Object.assign({}, state, {
