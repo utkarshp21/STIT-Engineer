@@ -1,6 +1,5 @@
 import initialState from './initialState';
 import {
-    FETCH_ALL_EVENTS,
     RECIEVE_ALL_EVENTS,
     RECIEVE_USER_LOCATION,
     RECIEVE_USER_DISTANCE,
@@ -12,9 +11,6 @@ const reducer = (state = initialState, action) => {
   
   let newState;
   switch (action.type) {
-
-    case FETCH_ALL_EVENTS:
-      return action;
 
     case RECIEVE_USER_LOCATION:
       newState = Object.assign({}, state, {

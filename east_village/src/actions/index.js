@@ -1,6 +1,5 @@
 import { google_api_key,yelp_api_key,} from '../credentials';
 
-export const FETCH_ALL_EVENTS = 'FETCH_ALL_EVENTS';
 export const RECIEVE_ALL_EVENTS = 'RECIEVE_ALL_EVENTS';
 export const RECIEVE_USER_LOCATION = 'RECIEVE_USER_LOCATION';
 export const RECIEVE_USER_DISTANCE = 'RECIEVE_USER_DISTANCE';
@@ -46,7 +45,7 @@ export function showEventModal(modal_show_status) {
 
 
 export function fetchUserLocation() {
-    //Function to fetch user location of user using Geolocation and handle condtion 
+    //Function to fetch location of user using Geolocation and handle condtion 
     //based on success and failure
     return (dispatch) => {
         if ("geolocation" in navigator) {
@@ -87,7 +86,7 @@ export function fetchUserLocation() {
 
 
 function googleDistanceUrl(events, user_location) {
-    //Function to formulate request URL for fetching  distance between user location and various events by
+    //Function to formulate request URL for fetching distance between user location and various events by
     //using google's distance matrix API
 
     const api_key = "key=" + google_api_key;
@@ -146,7 +145,7 @@ function fetchEvents() {
                 if (getState().user_location.latitude){
                     dispatch(fetchDistance(getState().events, getState().user_location))
                 }       
-            });
+        });
     };
 }
 

@@ -37,8 +37,8 @@ class eventsList extends React.Component {
                 <tbody>
                   {
                     this.props.events.map((event,index) => (
-                      <tr onClick={()=>this.props.eventsActions.showEventModal({state:true,event_index:index})} key="{index}">
-                        <td>{index+1}</td>
+                      <tr onClick={()=>this.props.eventsActions.showEventModal({state:true,event_index:index})} key={index}>
+                        <td >{index+1}</td>
                         <td>{event.name}</td>
                         <td>{Moment(event.time_start).format('d MMM YYYY')}</td>
                         <td>{event.location.display_address[0]}</td>
