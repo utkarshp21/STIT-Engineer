@@ -17,8 +17,9 @@ const MyMapComponent = withScriptjs(withGoogleMap((props) =>
 
     return <GoogleMap defaultZoom={10} defaultCenter={{ lat: event_location.lat, lng:event_location.lng }}>
         {props.isMarkerShown && <Marker position={{ lat: event_location.lat, lng:event_location.lng }} title="Event"  />}
-        {props.isMarkerShown && <Marker position={{ lat: user_location.lat, lng: user_location.lng }} icon={user_icon} title="Your Location" />}
-        <Polyline 
+        {props.isMarkerShown && user_location.lat && <Marker position={{ lat: user_location.lat, lng: user_location.lng }} icon={user_icon} title="Your Location" />}
+        {
+            user_location.lat && < Polyline
             path = {
                 [user_location, event_location]
             }
@@ -28,7 +29,7 @@ const MyMapComponent = withScriptjs(withGoogleMap((props) =>
                 strokeOpacity: 0.8,
                 strokeWeight: 2,
             }}
-        />
+        />}
     </GoogleMap>}
 ))
 

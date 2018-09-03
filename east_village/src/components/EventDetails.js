@@ -11,7 +11,7 @@ import Moment from 'moment';
 class EventDetailsModal extends React.Component {
   renderDistance(event) {
     return (
-      <td>{event.user_distance.status !== "ZERO_RESULTS"?event.user_distance.distance.text:"No Direct Road Route"}</td>
+      <span>{event.user_distance.status !== "ZERO_RESULTS"?event.user_distance.distance.text:"No Direct Road Route"}</span>
     )
   }
 
