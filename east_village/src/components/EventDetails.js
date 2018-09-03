@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {Modal,Button} from 'react-bootstrap';
 import LocationMarker from './LocationMarker'; 
+import Moment from 'moment';
 
 
 class EventDetailsModal extends React.Component {
@@ -33,7 +34,7 @@ class EventDetailsModal extends React.Component {
           < Modal.Body>
               <div className="row">
                 <div className="col-md-6">
-                 <h4>Start Time:</h4> <p>{event.time_start}</p>
+                 <h4>Start Time:</h4> <p>{Moment(event.time_start).format('d MMM YYYY')}</p>
                 </div>
                 <div className="col-md-6">
                  <h4>Address:</h4> <p>{event.location.display_address}</p>

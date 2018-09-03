@@ -4,6 +4,7 @@ import * as eventsActions from '../actions/';
 import PropTypes from 'prop-types';
 import React from 'react';
 import '../App.css';
+import Moment from 'moment';
 
 import EventDetailsModal from './EventDetails';
 
@@ -39,7 +40,7 @@ class eventsList extends React.Component {
                       <tr onClick={()=>this.props.eventsActions.showEventModal({state:true,event_index:index})} key="{index}">
                         <td>{index+1}</td>
                         <td>{event.name}</td>
-                        <td>{event.time_start}</td>
+                        <td>{Moment(event.time_start).format('d MMM YYYY')}</td>
                         <td>{event.location.display_address[0]}</td>
                         {event.user_distance?this.renderDistance(event):<td>-</td>}
                         <td>{event.is_free?"Free":(event.cost?event.cost:"Not Available")}</td>
