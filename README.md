@@ -1,6 +1,6 @@
 # STIT PROGRAMMING CHALLENGE 
 
-Heroku Working Application Link - https://eastvillage1.herokuapp.com/
+Working Application Link - https://eastvillage1.herokuapp.com/ (Heroku servers are slow, will take some time for intial loading)
 
 Steps to setup application:
 
